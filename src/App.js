@@ -1,8 +1,8 @@
-
+import {useState, useEffect} from 'react'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import {useState, useEffect} from 'react'
+
 import Tasks from './components/Tasks'
 import AddTasks from './components/AddTask'
 import About from './components/About'
@@ -68,7 +68,8 @@ const App = () => {
       },
       body: JSON.stringify(updTask),
     })
-    setTasks(tasks.map((task) => task.id === id ? {...task, reminder: !task.reminder} : task))
+    const data = await res.json()
+    setTasks(tasks.map((task) => task.id === id ? {...task, reminder: data.reminder} : task))
   }
 
   return (
